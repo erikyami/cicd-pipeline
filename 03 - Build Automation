@@ -1,0 +1,90 @@
+## Build Automation
+
+Build automatin is the automation of tasks needed in order to process and prepare source code for deployment to production. It is an important component of continuous integration.
+
+This includes things like:
+* Compiling
+* Dependency Management
+* Executing Automated Tests
+* Packaging the App of Deployment
+
+## Gradle
+In this course, we will use Gradle as our build automation tool. There are plenty of other tools, but Gradle is very powerful for doing the things we will need to do.
+
+Use the following link to download Gradle:
+https://gradle.org
+
+Installing Gradle
+
+Gradle can be easily installed with a package manager
+Dependencies: Java JDK 7 or higher
+
+On some systems, you will need to download and extract a zip file.
+
+Installation instructions for a variety of environments can be found at:
+https://gradle.org/install
+
+You can verify that your installation is working with:
+gradle --version
+
+cd ~/
+wget -O ~/gradle-4.7-bin.zip https://services.gradle.org/distributions/gradle-4.7-bin.zip
+sudo yum -y install unzip java-1.8.0-openjdk
+sudo mkdir /opt/gradle
+sudo unzip -d /opt/gradle/ ~/gradle-4.7-bin.zip
+sudo vi /etc/profile.d/gradle.sh
+
+Put this text into gradle.sh:
+export PATH=$PATH:/opt/gradle/gradle-4.7/bin
+
+Then set permissions on gradle.sh:
+sudo chmod 755 /etc/profile.d/gradle.sh
+
+Finally, after logging out of the server and logging back in:
+gradle --version
+
+And the commands used to install and run the Gradle Wrapper:
+
+cd ~/
+mkdir my-project
+cd my-project
+gradle wrapper
+./gradlew build
+
+
+## The Gradle Wrapper
+One of the features of Gradle that we will use is the 'Gradle Wrapper'.
+From the Gradle site: "The Wrapper is a script that invokes a declared version of Gradle, downloading it beforehand if necessary."
+
+Gradle Wrapper allows Gradle to install itself using just the files from your project's source control.
+
+The Wrapper is useful because:
+* It removes the need to have Gradle installed beforehand in order to run the build
+* Ensures the project is always built with a specific version of Gradle
+* Lets you build multiple projects with different Gradle versions on one system
+* Anyone (or any automated process) can run the build quickly and easily - they only need Java
+
+Install The Gradle Wrapper
+
+If you already have a normal Gradle install on your system, you can use it to easily install the wrapper:
+* cd /your/project/root/directory
+* gradle wrapper
+
+You should also add the line .gradle to your .gitignore file
+
+This will place a script file in your project's root directory called gradlew (there is also a gradlew.bat for Windows systems)
+
+Run Gradle commands against your project like this:
+* cd /your/project/root/directory
+* ./gradlew build
+
+
+
+
+
+
+
+
+
+
+
