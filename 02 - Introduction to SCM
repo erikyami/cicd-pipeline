@@ -1,0 +1,142 @@
+## SCM and the CI/CD Pipeline
+
+Source Control Management(SCM) is an important component of our CI/CD Pipeline
+
+* It is a huge part of the daily dev workflow:
+    * All Code changes made by devs will need to be tracked in SCM
+    * Devs will use SCM to track their changes separately and then merge them together
+* All pieces of automation that need to interact with the source code will use SCM:
+    * Continuous Integration (CI) will get the code from SCM
+    * SCM will notify the CI server when code needs to be built
+    
+Git SCM
+
+We will be using Git, and specifically GitHub, to manage the source code for the Train Schedule app.
+
+* You need to know what steps need to be done in order to make a change to the source code and ensure that change is managed in Git:
+    * Cloning
+    * Adding
+    * Committing
+    * Pushing
+    * Branching
+    * Merging
+    * Pull Requests
+
+## Installing Git
+
+Git installation instructions for your system:
+https://git-scm.com/downloads
+
+On a Linux distro that uses rpm:
+sudo yum -y install git 
+
+
+Configuring Your Name and Email
+
+After installing git, you need to set the name and email that will be associated with your commits. When using GitHub, it is best to use an email address that is associated with your GitHub account.
+
+git config --global user.name "<your name>"
+git config --global user.email "<your email>"
+
+Setting up Private Key Access
+
+An easy way to authenticate with a remote git server like GitHub is to use an ssh key pair.
+
+On a CentOS environment, you can generate an ssh key pair like this:
+
+ssh-keygen -t rsa -b 4096
+
+This command will prompt you for several thing. These can be left as their defaults, though it is good practice to enter a passphrase. If you do use a passphrase, make sure remember what it is.
+
+After generating the key pair, copy the contents of ~/.ssh/id_rsa.pub
+
+On GitHub.com, click you profile image at the top right, then click "settings", "SSH and GPG Keys" Click "new ssh key" enter a name and paste the contents of id_rsa.pub into the key field, then submit the form.
+
+
+
+## git status
+
+The status command is a very useful command whenever you need to know about the current status of your local repository:
+
+git status
+
+This command will tell you all sorts of useful information, like:
+* Whether you have any changes that are not yet staged for commit
+* Wheter you have staged changes that are not committed
+* What branch you are currently using
+
+## git add
+
+The add command stages changed files for the next commit. This allows you to control which files are committed and which are not:
+
+git add <file>
+
+Before you can commit a change to a file, you need to add the file to the staging area. Use 'git status' to see which changed files have and have not been added. To add all files that have been changed use:
+
+git add .
+
+or 
+
+git add -A
+
+## git commit
+
+Commit adds your changes to your local repository and makes them part of the repository's change history. When you are satisfied with a change or set of changes that you have made to the files, you are ready to commit them:
+
+git commit -m "<message describing the change>"
+
+A few notes on commit:
+* Commit only adds the changes to your local copy of the repository. It does not push them to any remote repository, such as GitHub
+* Commit will only commit the changes that were staged using 'git add'
+
+
+## git push
+
+Git push pushes the changes that you have been made to your local repository to a remote repository, such as GitHub. Until you push changes, they are only stored locally on your system:
+
+git push
+
+By default, push will push the changes to a remote repository associated with the current local branch. If you cloned the branch from an existing remote repository, this relationship is already set up for you, and you can simply use 'git push'. If not, you may need to specify which remote repository and which branch you want push to use:
+
+git push -u <remote name, usually origin> <branch name>
+
+
+## git branches
+
+Branches are used to maintain multiple versions of the code with different changes simultaneously.
+
+Many teams use branches as part of the daily workflow
+
+Branches can also be used to interact with a CI/CD Pipeline. For example, some teams maintain a "production" branch, and merging changes into this branch initiates automated processes involved with deploying to production.
+
+By default, a git repository starts with one branch called "master"
+
+## git checkout
+
+'git checkout' checks out an existing branch. This means that it puts the contents of the branch into your working tree and your working copy of the source code files.
+
+When you commit, whichever branch you have checked out will be the branch that the commit is added to.
+
+git checkout <branch>
+
+You can create a new branch and check it out immediately with the '-b' flag:
+
+git checkout -b <new branch>
+
+## git tag
+
+Tags in git are simply pointers to a particular commit. They can be used to provide a name that can be used to reference that commit in the future.
+
+One use for tags is to tag source code commits with the version of the software that they represent, so if a particular revision gets released as version 1.0.0, it could be tagged as "v1.0.0" in order to indicate that.
+
+
+
+## Pull Requests
+
+Pull requests are not actually a feature of the git software itself. However, they are a useful tool offered by many git remote server implementations, such as GitHub.
+
+Usually, teams work using multiple branches to manage all of their changes. At some point, these branches need to be merged together (preferably as often as possible).
+
+Merges can he handled locally using git, but another way to do this is through pull requests.
+
+A pull request is a request made by a developer to merge their changes into another branch (usually a shared mainline). It gives other team members a chance to review the changes before performing the merge.

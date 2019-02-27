@@ -1,0 +1,5 @@
+Implementing a Full CI/CD Pipeline
+
+This course guides you through the process of bulding a CI/CD Pipeline using a variety of tools. It begins with basic CI-related concepts, like source control and build automation. Then it moves along to covering containers, orchestration, and monitoring. Finally, the course covers how to strengthen the stability of you pipeline using things likes self-healing, autoscaling, and canary deployments.
+
+While many courses focus on teaching you how to use a particular tool, this one focuses instead on using a variety of tools and how they fit together as part of the CI/CD Pipeline "big picture"
